@@ -1,4 +1,7 @@
-var $ = function(){
+
+/* this keyword makes the function as a constructor
+*/
+var code = function(){
 
     // testing the usefulness of student[attr] object attribute access method
      this.objChecker = function(){
@@ -9,7 +12,7 @@ var $ = function(){
         for( attr in student){
             console.log( attr + ': ' +student[attr]);
         }
-    }
+    };
 
     //maps
      this.mapChecker = function(){
@@ -52,13 +55,27 @@ var $ = function(){
     }
 
     //Arrays
-    var arrChecker = function() {
+     this.arrChecker = function() {
         var x = [1, 2, 'Dibya'];
         console.log(x);
     }
-};
 
-$.objChecker();
+    //Iterator & Generators 
+    this.iteratorChecker = function(){
+        function* str(arg){
+            let i =0;
+            for( let i =0; i < arg.length; i++){
+                yield arg[i]; // Pauses the function execution and makes done = false
+               // return arg[i];// completes execution and makes done = true
+            }
+        }
+        var itr = str('Dibya');
+        console.log(itr.next() ); //{done: false, value: "D"}
+        console.log(itr.next().done);//false
+    }
+};
+var $ = new code(); // Until this is done the object hasn't been instanciated. 
+$.iteratorChecker();
 // Is this self invoke as well?
 function callInstantly(){
     console.log("I am getting called instantly");
